@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <script type="text/javascript" src="js/jquery/jquery.min.js"></script>
+</head>
+<body>
+<table>
+</table>
+<input type="text" id="testText"/>
+<button type="button" onclick="test();">test</button>
+<!--<label for="wheelDelta">滚动值:</label>(IE/Opera)<input type="text" id="wheelDelta"/>-->
+<!--<label for="detail">滚动值:(Firefox)</label><input type="text" id="detail"/>-->
+<!--<script type="text/javascript">-->
+    <!--var scrollFunc=function(e){-->
+        <!--ee=e || window.event;-->
+        <!--var t1=document.getElementById("wheelDelta");-->
+        <!--var t2=document.getElementById("detail");-->
+        <!--if(e.wheelDelta){//IE/Opera/Chrome-->
+            <!--t1.value=e.wheelDelta;-->
+        <!--}else if(e.detail){//Firefox-->
+            <!--t2.value=e.detail;-->
+        <!--}-->
+    <!--}-->
+    <!--/*注册事件*/-->
+    <!--if(document.addEventListener){-->
+        <!--document.addEventListener('DOMMouseScroll',scrollFunc,false);-->
+    <!--}//W3C-->
+    <!--window.onmousewheel=document.onmousewheel=scrollFunc;//IE/Opera/Chrome-->
+<!--</script>-->
+<script type="text/javascript">
+    let re = /(\w+)\s(\w+)/;
+    let str = "John Smith";
+    let newstr = str.replace(re, "$2 $1");
+    console.log(newstr)
+    let count = 1;
+    function test(){
+        let re1 = /^<(\w+)>/;
+        console.log(count+">>>"+$("#testText").val());
+        count = count+1;
+    }
+</script>
+</body>
+</html>
