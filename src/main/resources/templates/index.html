@@ -30,16 +30,20 @@
     <!--window.onmousewheel=document.onmousewheel=scrollFunc;//IE/Opera/Chrome-->
 <!--</script>-->
 <script type="text/javascript">
-    let re = /(\w+)\s(\w+)/;
-    let str = "John Smith";
-    let newstr = str.replace(re, "$2 $1");
-    console.log(newstr)
     let count = 1;
     function test(){
-        let re1 = /^<(\w+)>/;
-        console.log(count+">>>"+$("#testText").val());
+        let str = removeHtmlTab("<p>你好</p><a>你好</a><div>你好</div><p>你好</p><p>你好</p><p>你好</p><a>你好</a><div>你好</div><p>你好</p><p>你好</p>")
+        console.log(str.length);
+        console.log(str+">>"+count);
+        console.log(str.substring(0, 10)+"...");
         count = count+1;
     }
+
+    function removeHtmlTab(tab) {
+        //删除所有HTML标签
+        return tab.replace(/<[^<>]+?>/g, '');
+    }
+
 </script>
 </body>
 </html>
