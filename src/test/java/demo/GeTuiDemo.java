@@ -23,32 +23,23 @@ import java.util.Map;
  * @Version 1.0
  */
 public class GeTuiDemo {
+    private static String appId ="";
+    private static String appKey ="";
+    private static String masterSecret ="";
+    private static String host = "http://sdk.open.api.igexin.com/apiex.htm";
     @Test
-    public void testAndroid(){
-        String clientId="21714c67bd7d154d894533c8d294e6f3";
-        //String clientId="123456";
-        Result result = pushToSingle(clientId,"烟台中小微企业融资平台App","测试个推消息,f4b0eef45379348568fc8717ba2cbd9furl=http://192.168.1.192:8091/app/company/creditnews/detailNews/1545012841295");
+    public void testAll(){
+        String clientId="";
+        Result result = pushToSingle(clientId,
+                "",
+                "");
         if(!result.isFlag()){
             System.out.println(result.getMessage());
         }
         System.out.println(result.isFlag());
 
     }
-    @Test
-    public void testIOS(){
-        String clientId="47118a251b638402af50e7b8f33f982a";
-        Result result = pushToSingle(clientId,"烟台中小微企业融资平台App","11111测试个推消息,f4b0eef45379348568fc8717ba2cbd9furl=http://192.168.1.247:8093/company/financialProduct/toDetail/1551401449564");
-        if(!result.isFlag()){
-            System.out.println(result.getMessage());
-        }
-        System.out.println(result.isFlag());
-
-    }
-    private static String appId ="FtQTCuG1xg7FYXwkHy52r7"; //ConfigModel.CONFIG.getProperty("getui.appId");
-    private static String appKey ="viooB8yf4K6PTULbQQ6tH7";// ConfigModel.CONFIG.getProperty("getui.appKey");
-    private static String masterSecret ="WgthxppOM66BgBrsTllGj3"; //ConfigModel.CONFIG.getProperty("getui.masterSecret");
-    private static String host = "http://sdk.open.api.igexin.com/apiex.htm";//ConfigModel.CONFIG.getProperty("getui.host");
-    public  Result pushToSingle(String clientId, String title, String text) {
+   public  Result pushToSingle(String clientId, String title, String text) {
         Result result = new Result();
         result.setFlag(false);
         if (StringUtils.isBlank(appId) ||StringUtils.isBlank(appKey)||StringUtils.isBlank(masterSecret)|| StringUtils.isBlank(host)) {
