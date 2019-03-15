@@ -74,15 +74,6 @@ public class MD5Demo {
         }
 
     }
-
-    /**
-     *
-     */
-    @Test
-    public void test4(){
-
-    }
-
     private String getMD5(String str, int count) {
         if (count == 0) {
             return str;
