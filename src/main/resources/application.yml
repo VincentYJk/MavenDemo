@@ -1,10 +1,43 @@
 server:
-  port: 1111
+  port: 8086
 spring:
   thymeleaf:
-    prefix:
-      classpath: /templates/
+    prefix: classpath:/templates/
     suffix: .html
-    model: HTML5
+    mode: HTML5
     encoding: UTF-8
     cache: false
+  datasource:
+    name: druidDataSource
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/spring_cloud_project?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&failOverReadOnly=false&useSSL=false&serverTimezone=GMT
+      username: root
+      password: aOY0LstOaxyG4uzZuSlSy8wN7ofFOxZ7Kdx0RNVzifEWGReaobY8nYbn4Lfrjs/ibO/Lec8FqTBVgFLYzLz9CQ==
+      # 配置监控统计拦截的filters，去掉后监控界面SQL无法进行统计，’wall’用于防火墙
+      filters: stat,wall,config
+      # 最大连接数
+      max-active: 100
+      # 初始化大小
+      initial-size: 5
+      # 获取连接等待超时时间
+      max-wait: 60000
+      # 最小连接数
+      min-idle: 5
+      db-type: mysql
+      #　间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      time-between-eviction-runs-millis: 60000
+      # 一个连接在池中最小生存的时间，单位是毫秒
+      min-evictable-idle-time-millis: 300000
+      validation-query: select 'x'
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      pool-prepared-statements: true
+      max-open-prepared-statements: 50
+      max-pool-prepared-statement-per-connection-size: 20
+      connection-properties: config.decrypt=true;config.decrypt.key=MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAKg43yQnZUcehOCYcxhP2Fdjx6Bx15pKdkqFH/1zEg10R0JZBBsftQpSebIIFwPz+9GfDsY9l2BXN4ruUbCGFAUCAwEAAQ==
+      filter:
+        config:
+          enabled: true   # 数据库过滤器
