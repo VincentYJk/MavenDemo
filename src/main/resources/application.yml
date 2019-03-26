@@ -41,3 +41,7 @@ spring:
       filter:
         config:
           enabled: true   # 数据库过滤器
+    data:
+      elasticsearch:
+        cluster-name: elasticsearch
+        cluster-nodes: 127.0.0.1:9300

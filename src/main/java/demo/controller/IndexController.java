@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class IndexController {
 
-    @RequestMapping("/index")
+    @RequestMapping({"/","/index"})
     public String index(HttpServletRequest request){
         String param = request.getParameter("xssSpan");
         request.setAttribute("xssSpan",param==null?"null":param);
