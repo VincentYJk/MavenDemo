@@ -89,6 +89,26 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
         </dependency>
+        <!-- 添加个推jar包 -->
+        <dependency>
+            <groupId>com.gexin.platform</groupId>
+            <artifactId>gexin-sdk-base</artifactId>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/resources/lib/gexin-rp-sdk-base-4.0.0.25.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.gexin.platform</groupId>
+            <artifactId>gexin-sdk-http</artifactId>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/resources/lib/gexin-rp-sdk-http-4.1.0.0.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.gexin.platform</groupId>
+            <artifactId>gexin-sdk-template</artifactId>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/resources/lib/gexin-rp-sdk-template-4.0.0.19.jar</systemPath>
+        </dependency>
+
     </dependencies>
     <build>
         <plugins>
