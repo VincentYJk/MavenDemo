@@ -41,7 +41,6 @@ spring:
       filter:
         config:
           enabled: true   # 数据库过滤器
-    data:
-      elasticsearch:
-        cluster-name: elasticsearch
-        cluster-nodes: 127.0.0.1:9300
+# 日志管理
+logging:
+  config: classpath:log4j2_dev.xml
