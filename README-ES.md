@@ -97,7 +97,7 @@
         # 是否为主节点
         node.master: false
         #　设置端口
-        http.port: 9202
+        http.port: 9201
         #　告诉从机，主机在哪里，配置值为一个IP地址列表，存放master的IP地址
         discovery.zen.ping.unicast.hosts: ["127.0.0.1"]
     ```   
@@ -105,4 +105,12 @@
     ```
         .\elasticsearch.bat -d
     ```
-    iv. 
+    iv. 进入127.0.0.1:9100可以看到一个master主节点与一个part1从节点
+3. 重复第二步，修改下方两处
+    ```
+          # 当前节点名称
+          node.name: part2
+          #　设置端口
+          http.port: 9202 
+    ```
+    再次启动，进入127.0.0.1:9100可以增加一个新的从节点part2
