@@ -15,6 +15,7 @@ import java.util.Map;
 public class ValidateEmail {
     private static final String url = "http://email.qhyt1688.com/Home/EValidation";
     @Test
+    @SuppressWarnings("unchecked")
     public void testSend(){
         String param = "emails=1111111@qq.com";
         String str = new PostUtil().send(url, param);
