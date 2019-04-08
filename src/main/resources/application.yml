@@ -41,15 +41,18 @@ spring:
       filter:
         config:
           enabled: true   # 数据库过滤器
-  data:
-    elasticsearch:
-      # 集群名称
-      cluster-name: elasticsearch-cluster
-      # api对应的端口是9300
-      cluster-nodes: 127.0.0.1:9300
-      # 是否开启本地存储
-      repositories:
-        enabled: false
+elasticsearch:
+  # ip
+  ip: 127.0.0.1
+  # 端口
+  port: 9300
+  # 连接池的size
+  pool: 5
+  # 索引名称，一个项目暂时只使用一个索引
+  index: rent
+  # 集群名
+  cluster:
+    name: elasticsearch-cluster
 # 日志管理
 logging:
   config: classpath:log4j2_dev.xml
