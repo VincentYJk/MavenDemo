@@ -41,16 +41,11 @@ spring:
       filter:
         config:
           enabled: true   # 数据库过滤器
+# elasticsearch
 elasticsearch:
-  # ip
   ip: 127.0.0.1
-  # 端口
   port: 9300
-  # 连接池的size
   pool: 5
-  # 索引名称，一个项目暂时只使用一个索引
-  index: rent
-  # 集群名
   cluster:
     name: elasticsearch-cluster
 # 日志管理
