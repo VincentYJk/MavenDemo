@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试m3u8播放</title>
+</head>
+<body>
+<video id="example-video" width=600 height=300 class="video-js vjs-default-skin" controls>
+    <source src="https://youku.com-okzy.com/20190428/146_a856ed37/index.m3u8" type="application/x-mpegURL">
+</video>
+<script type="text/javascript" src="../js/video-js/video.min.js"></script>
+<script type="text/javascript" src="../js/video-js/videojs-contrib-hls.min.js"></script>
+<script>
+    var player = videojs('#example-video');
+    player.play();
+</script>
+</body>
+</html>
