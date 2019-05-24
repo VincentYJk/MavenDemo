@@ -22,7 +22,8 @@ import org.junit.Test;
 public class LogInAndLoginOut {
     @Test
     public void test() {
-        Factory<org.apache.shiro.mgt.SecurityManager> factory = new IniSecurityManagerFactory("classpath:config/shiro-realm.ini");
+        Factory<org.apache.shiro.mgt.SecurityManager> factory =
+                new IniSecurityManagerFactory("classpath:config/chapter1/shiro-realm.ini");
         org.apache.shiro.mgt.SecurityManager securityManager = factory.getInstance();
         SecurityUtils.setSecurityManager(securityManager);
         Subject subject = SecurityUtils.getSubject();
@@ -55,7 +56,7 @@ public class LogInAndLoginOut {
 
     @Test
     public void testLogin() {
-        login("classpath:config/shiro-authenticator-all-success.ini");
+        login("classpath:config/chapter1/shiro-authenticator-all-success.ini");
         Subject subject = SecurityUtils.getSubject();
         //得到一个身份集合，其包含了Realm验证成功的身份信息
         PrincipalCollection principalCollection = subject.getPrincipals();
