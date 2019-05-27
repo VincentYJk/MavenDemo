@@ -1,49 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:p="http://www.w3.org/1999/html"
+      xmlns:tr="http://www.w3.org/1999/xhtml">
+<script type="text/javascript" src="js/lib/util.js"></script>
 <head>
     <meta charset="UTF-8">
     <title>首页</title>
-    <script type="text/javascript" src="js/jquery/jquery.min.js"></script>
 </head>
 <body>
-<table>
-</table>
-<input type="text" id="testText"/>
-<button type="button" onclick="test();">test</button>
-<!--<label for="wheelDelta">滚动值:</label>(IE/Opera)<input type="text" id="wheelDelta"/>-->
-<!--<label for="detail">滚动值:(Firefox)</label><input type="text" id="detail"/>-->
-<!--<script type="text/javascript">-->
-    <!--var scrollFunc=function(e){-->
-        <!--ee=e || window.event;-->
-        <!--var t1=document.getElementById("wheelDelta");-->
-        <!--var t2=document.getElementById("detail");-->
-        <!--if(e.wheelDelta){//IE/Opera/Chrome-->
-            <!--t1.value=e.wheelDelta;-->
-        <!--}else if(e.detail){//Firefox-->
-            <!--t2.value=e.detail;-->
-        <!--}-->
-    <!--}-->
-    <!--/*注册事件*/-->
-    <!--if(document.addEventListener){-->
-        <!--document.addEventListener('DOMMouseScroll',scrollFunc,false);-->
-    <!--}//W3C-->
-    <!--window.onmousewheel=document.onmousewheel=scrollFunc;//IE/Opera/Chrome-->
-<!--</script>-->
-<script type="text/javascript">
-    let count = 1;
-    function test(){
-        let str = removeHtmlTab("<p>你好</p><a>你好</a><div>你好</div><p>你好</p><p>你好</p><p>你好</p><a>你好</a><div>你好</div><p>你好</p><p>你好</p>")
-        console.log(str.length);
-        console.log(str+">>"+count);
-        console.log(str.substring(0, 10)+"...");
-        count = count+1;
-    }
-
-    function removeHtmlTab(tab) {
-        //删除所有HTML标签
-        return tab.replace(/<[^<>]+?>/g, '');
-    }
-
-</script>
+<h2>Hello World!</h2>
+<a th:href="@{/billAnalysis/index}">点击跳转到【数据可视化账单分析演示】</a>
 </body>
 </html>

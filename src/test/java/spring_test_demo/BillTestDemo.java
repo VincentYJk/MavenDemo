@@ -4,6 +4,7 @@ import demo.DemoApplication;
 import demo.model.analysis.BillModel;
 import demo.service.analysis.impl.BillServiceImpl;
 import demo.util.IdUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import org.springframework.test.context.junit4.SpringRunner;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = DemoApplication.class)
+@Slf4j
 public class BillTestDemo {
     @Autowired
     private BillServiceImpl billService;
@@ -28,18 +30,18 @@ public class BillTestDemo {
     public void testSave() {
         BillModel billModel = new BillModel();
         billModel.setId(IdUtil.getUUID());
-        billModel.setBankName("测试银行");
-        billModel.setOweAmount("200");
-        billModel.setMouth("05");
+        billModel.setBankName("测试银行2");
+        billModel.setOweAmount("2100");
+        billModel.setMouth("06");
         billModel.setYear("2019");
-        billModel.setAddTime("2019-05-27");
+        billModel.setAddTime("2019-06-27");
         billService.saveBill(billModel);
     }
 
     @Test
     public void testQueryByBankName() {
         BillModel billModel = billService.queryByBankName("测试银行");
-        System.out.println(billModel.toString());
+        log.info(billModel.toString());
     }
 
     @Test
@@ -52,7 +54,7 @@ public class BillTestDemo {
         billModel.setYear("2019");
         billModel.setAddTime("2019-05-27");
         long num = billService.updateBill(billModel);
-        System.out.println("num>>>" + num);
+        log.info("num>>>" + num);
     }
 
     @Test

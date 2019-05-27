@@ -1,4 +1,4 @@
-package demo.controller;
+package demo.controller.common;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;

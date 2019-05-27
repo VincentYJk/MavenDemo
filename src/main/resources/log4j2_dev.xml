@@ -23,8 +23,8 @@
             <AppenderRef ref="Console" />
             <AppenderRef ref="RollingRandomAccessFile" />
         </Root>
-        <Logger name="com.mengdee.dao" level="${log.sql.level}" additivity="false">
-            <AppenderRef ref="Console" />
-        </Logger>
+        <!--<Logger name="com.mengdee.dao" level="${log.sql.level}" additivity="false">-->
+            <!--<AppenderRef ref="Console" />-->
+        <!--</Logger>-->
     </Loggers>
 </Configuration>

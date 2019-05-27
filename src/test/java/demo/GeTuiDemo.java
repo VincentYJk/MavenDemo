@@ -9,6 +9,7 @@ import com.gexin.rp.sdk.exceptions.RequestException;
 import com.gexin.rp.sdk.http.IGtPush;
 import com.gexin.rp.sdk.template.TransmissionTemplate;
 import demo.model.Result;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
@@ -17,30 +18,33 @@ import java.util.Map;
 
 /**
  * @author Administrator
- * @date 2019/3/5 14:01
  * @version 1.0
+ * @date 2019/3/5 14:01
  */
+@Slf4j
 public class GeTuiDemo {
-    private static String appId ="";
-    private static String appKey ="";
-    private static String masterSecret ="";
+    private static String appId = "";
+    private static String appKey = "";
+    private static String masterSecret = "";
     private static String host = "http://sdk.open.api.igexin.com/apiex.htm";
+
     @Test
-    public void testAll(){
-        String clientId="";
+    public void testAll() {
+        String clientId = "";
         Result result = pushToSingle(clientId,
                 "",
                 "");
-        if(!result.isFlag()){
-            System.out.println(result.getMessage());
+        if (!result.isFlag()) {
+            log.info(result.getMessage());
         }
-        System.out.println(result.isFlag());
+        log.info(result.isFlag() + "");
 
     }
-   private   Result pushToSingle(String clientId, String title, String text) {
+
+    private Result pushToSingle(String clientId, String title, String text) {
         Result result = new Result();
         result.setFlag(false);
-        if (StringUtils.isBlank(appId) ||StringUtils.isBlank(appKey)||StringUtils.isBlank(masterSecret)|| StringUtils.isBlank(host)) {
+        if (StringUtils.isBlank(appId) || StringUtils.isBlank(appKey) || StringUtils.isBlank(masterSecret) || StringUtils.isBlank(host)) {
             result.setMessage("配置参数错误");
             return result;
         }
@@ -53,12 +57,12 @@ public class GeTuiDemo {
         message.setOffline(true);
         // 离线有效时间，单位为毫秒，可选
         message.setOfflineExpireTime(24 * 3600 * 1000);
-        String[] contentArr= text.split("url=");
-        if (contentArr.length!=2) {
+        String[] contentArr = text.split("url=");
+        if (contentArr.length != 2) {
             result.setMessage("content内容错误必须包含app链接");
             return result;
         }
-        TransmissionTemplate template = transmissionTemplate(title,contentArr);
+        TransmissionTemplate template = transmissionTemplate(title, contentArr);
         message.setData(template);
         // 可选，1为wifi，0为不限制网络环境。根据手机处于的网络情况，决定是否下发
         message.setPushNetWorkType(0);
@@ -75,7 +79,7 @@ public class GeTuiDemo {
         if (ret != null) {
             String responseResult = ret.getResponse().get("result").toString();
             if ("ok".equals(responseResult)) {
-                System.out.println(ret.getResponse());
+                log.info(ret.getResponse().toString());
                 result.setFlag(true);
             } else {
                 result.setFlag(false);
@@ -93,22 +97,23 @@ public class GeTuiDemo {
         return result;
     }
 
-    private   TransmissionTemplate transmissionTemplate(String title,String[] contentArr) {
+    private TransmissionTemplate transmissionTemplate(String title, String[] contentArr) {
         TransmissionTemplate template = new TransmissionTemplate();
         template.setAppId(appId);
         template.setAppkey(appKey);
         // 透传消息设置，1为强制启动应用，客户端接收到消息后就会立即启动应用；2为等待应用启动
         template.setTransmissionType(1);
-        Map<String,Object> map= new HashMap<>();
-        map.put("title",title);
-        map.put("content",contentArr[0]);
-        map.put("payload",contentArr[1]);
+        Map<String, Object> map = new HashMap<>();
+        map.put("title", title);
+        map.put("content", contentArr[0]);
+        map.put("payload", contentArr[1]);
         JSON.toJSONString(map);
         template.setTransmissionContent(JSON.toJSONString(map));
-        template.setAPNInfo(getAPNPayload(title,contentArr));
+        template.setAPNInfo(getAPNPayload(title, contentArr));
         return template;
     }
-    private APNPayload getAPNPayload(String title,String[] contentArr) {
+
+    private APNPayload getAPNPayload(String title, String[] contentArr) {
         APNPayload payload = new APNPayload();
         //在已有数字基础上加1显示，设置为-1时，在已有数字上减1显示，设置为数字时，显示指定数字
         payload.setAutoBadge("+1");
@@ -121,10 +126,11 @@ public class GeTuiDemo {
         //简单模式APNPayload.SimpleMsg
         payload.setAlertMsg(new APNPayload.SimpleAlertMsg("hello"));
         //字典模式使用APNPayload.DictionaryAlertMsg
-        payload.setAlertMsg(getDictionaryAlertMsg(title,contentArr));
-        return  payload;
+        payload.setAlertMsg(getDictionaryAlertMsg(title, contentArr));
+        return payload;
     }
-    private static APNPayload.DictionaryAlertMsg getDictionaryAlertMsg(String title,String[] contentArr){
+
+    private static APNPayload.DictionaryAlertMsg getDictionaryAlertMsg(String title, String[] contentArr) {
         APNPayload.DictionaryAlertMsg alertMsg = new APNPayload.DictionaryAlertMsg();
         //内容
         alertMsg.setBody(contentArr[0]);

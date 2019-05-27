@@ -1,6 +1,7 @@
 package demo;
 
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
@@ -18,13 +19,14 @@ import java.util.regex.Pattern;
  * 但知道结果是100却很难推测出是通过1+99得来的。
  * 推荐文章：https://blog.csdn.net/qq_40006446/article/details/80930113
  */
+@Slf4j
 public class MD5Demo {
     static Pattern pattern1 = Pattern.compile("^\\d+$|-\\d+$");
     static Pattern pattern2 = Pattern.compile("\\d+\\.\\d+$|-\\d+\\.\\d+$");
 
     @Test
     public void test4() {
-        System.out.println(isNum("13.0"));
+        log.info(isNum("13.0") + "");
     }
 
     private static boolean isNum(String value) {
@@ -41,7 +43,7 @@ public class MD5Demo {
     @Test
     public void test1() {
         String test_str_first = 11315 + "";
-        System.out.println(getMD5(test_str_first));
+        log.info(getMD5(test_str_first));
     }
 
     /**
@@ -54,12 +56,12 @@ public class MD5Demo {
         String test_str_first = 11315 + "";
         String salt = "666";
         // 1 :多次加密
-        // System.out.println(getMD5(test_str_first, 2));
+        // log.info(getMD5(test_str_first, 2));
         //2 : 加盐
         //2.1 密码加盐
-        // System.out.println(getMD5(test_str_first+salt));
+        // log.info(getMD5(test_str_first+salt));
         //2.2 加密之后加盐
-        // System.out.println(getMD5(test_str_first,salt));
+        // log.info(getMD5(test_str_first,salt));
     }
 
     @Test
@@ -75,10 +77,10 @@ public class MD5Demo {
             String str2 = DigestUtils.md5Hex(new FileInputStream(path + "HelloWorld-colliding.exe"));
             String str1_sha = DigestUtils.sha1Hex(path + "GoodbyeWorld-colliding.exe");
             String str2_sha = DigestUtils.sha1Hex(path + "HelloWorld-colliding.exe");
-            System.out.println("str1 md5>>>>>" + str1);
-            System.out.println("str2 md5>>>>>" + str2);
-//            System.out.println("str1_sha>>>>>"+str1_sha);
-//            System.out.println("str1_sha>>>>>"+str2_sha);
+            log.info("str1 md5>>>>>" + str1);
+            log.info("str2 md5>>>>>" + str2);
+//            log.info("str1_sha>>>>>"+str1_sha);
+//            log.info("str1_sha>>>>>"+str2_sha);
             /*
              * 怎样解决碰撞
              * 解决碰撞其实可以通过 MD5 和 SHA-1 结合使用来实现。
@@ -87,10 +89,10 @@ public class MD5Demo {
              * MD5 值碰撞的几率已经很小，再结合 SHA-1 的话，基本上就不会发生碰撞的问题出现了
              * 在新的算法普及之前，MD5 还是可以继续使用的。
              */
-//            System.out.println(DigestUtils.md5Hex(str1+str1_sha));
-//            System.out.println(DigestUtils.md5Hex(str2+str2_sha));
+//            log.info(DigestUtils.md5Hex(str1+str1_sha));
+//            log.info(DigestUtils.md5Hex(str2+str2_sha));
         } catch (Exception e) {
-            System.out.println(e);
+            log.info(e.toString());
         }
 
     }

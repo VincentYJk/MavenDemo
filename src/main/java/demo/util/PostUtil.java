@@ -1,5 +1,7 @@
 package demo.util;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -13,6 +15,7 @@ import java.net.URLConnection;
  * @author 梁明辉
  * @date 2019/3/28 15:06
  */
+@Slf4j
 public class PostUtil {
     @SuppressWarnings("unchecked")
     public String send(String url,String param){
@@ -45,7 +48,7 @@ public class PostUtil {
                 stringBuilder.append(line);
             }
         } catch (Exception e) {
-            System.out.println("发送 POST 请求出现异常！"+e);
+            log.info("发送 POST 请求出现异常！"+e);
             e.printStackTrace();
         }
         finally{
