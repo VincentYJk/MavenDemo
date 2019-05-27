@@ -41,6 +41,12 @@ spring:
       filter:
         config:
           enabled: true   # 数据库过滤器
+---
+spring:
+  data:
+    mongodb:
+      # 多个ip spring.data.mongodb.uri=mongodb://user:pwd@ip1:port1,ip2:port2/database
+      uri: mongodb://root:supporter@localhost:27017/admin
 # elasticsearch
 elasticsearch:
   ip: 127.0.0.1
