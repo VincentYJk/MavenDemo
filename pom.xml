@@ -115,12 +115,6 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
         </dependency>
-        <!-- 添加个推jar包 -->
-        <dependency>
-            <groupId>com.gexin.platform</groupId>
-            <artifactId>gexin-rp-sdk-http</artifactId>
-            <version>4.1.0.1</version>
-        </dependency>
         <!-- elasticsearch相关 -->
         <dependency>
             <groupId>org.elasticsearch</groupId>
