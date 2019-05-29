@@ -1,7 +1,5 @@
 package shiro.chapter2;
 
-import com.gexin.rp.sdk.base.uitls.StringUtils;
-import org.apache.shiro.authz.UnauthorizedException;
 import org.junit.Assert;
 import org.junit.Test;
 
