@@ -3,8 +3,10 @@ package demo.config;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.session.mgt.SessionManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -70,10 +72,24 @@ public class ShiroConfig {
 
     }
 
+    /**
+     * sessionManager设置超时时间，默认30min
+     *
+     * @return
+     */
+    @Bean
+    public SessionManager sessionManager() {
+        DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
+        //设置session超时时间单位是毫秒
+        sessionManager.setGlobalSessionTimeout(1800000);
+        return sessionManager;
+    }
+
     @Bean
     public SecurityManager securityManager() {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
         securityManager.setRealm(myShiroRealm());
+        securityManager.setSessionManager(sessionManager());
         return securityManager;
     }
 }
