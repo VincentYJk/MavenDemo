@@ -30,6 +30,26 @@ public class MyShiroRealm extends AuthorizingRealm {
     SysUserService sysUserService;
 
     /**
+     * 权限配置
+     *
+     * @param principals
+     * @return
+     */
+    @Override
+    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
+        log.info("权限配置-->MyShiroRealm.doGetAuthorizationInfo()");
+        SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
+        SysUserModel userInfo = (SysUserModel) principals.getPrimaryPrincipal();
+        for (SysRoleModel role : userInfo.getRoleList()) {
+            authorizationInfo.addRole(role.getRole());
+            for (SysPermModel p : role.getPermissions()) {
+                authorizationInfo.addStringPermission(p.getPermission());
+            }
+        }
+        return authorizationInfo;
+    }
+
+    /**
      * 从token获取用户并验证
      *
      * @param token
@@ -40,9 +60,8 @@ public class MyShiroRealm extends AuthorizingRealm {
             throws AuthenticationException {
         log.info("用户验证-->MyShiroRealm.deGetAuthenticationInfo()");
         //从token获取输入的账号
-        String userName = (String) token.getPrincipal();
-        SysUserModel sysUserModel = sysUserService.findByUserName(userName);
-        log.info("用户信息>>>" + sysUserModel.toString());
+        String username = (String) token.getPrincipal();
+        SysUserModel sysUserModel = sysUserService.findByUserName(username);
         if (sysUserModel == null) {
             return null;
         }
@@ -55,23 +74,5 @@ public class MyShiroRealm extends AuthorizingRealm {
         return authenticationInfo;
     }
 
-    /**
-     * 权限配置
-     *
-     * @param principals
-     * @return
-     */
-    @Override
-    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-        System.out.println("权限配置-->MyShiroRealm.doGetAuthorizationInfo()");
-        SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
-        SysUserModel sysUserModel = (SysUserModel) principals.getPrimaryPrincipal();
-        for (SysRoleModel role : sysUserModel.getRoleList()) {
-            authorizationInfo.addRole(role.getRole());
-            for (SysPermModel p : role.getPermissions()) {
-                authorizationInfo.addStringPermission(p.getPermission());
-            }
-        }
-        return authorizationInfo;
-    }
+
 }

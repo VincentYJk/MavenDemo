@@ -1,9 +1,7 @@
 package demo.dao.system;
 
 import demo.model.system.SysUserModel;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-import org.springframework.stereotype.Component;
+import org.springframework.data.repository.CrudRepository;
 
 /**
  * @ClassName SysUserDao
@@ -13,20 +11,12 @@ import org.springframework.stereotype.Component;
  * @ModifyDate 2019/6/13 15:14
  * @Version 1.0
  */
-@Component
-public interface SysUserDao {
+public interface SysUserDao extends CrudRepository<SysUserModel, Long> {
     /**
-     * 根据用户名查找用户
+     * 通过username查找用户信息;
      *
-     * @param userName 用户名
-     * @return
+     * @param username 用户名
+     * @return 用户信息
      */
-    @Select("select * from sys_user where userName = #{userName}")
-    SysUserModel findByUserName(@Param("userName") String userName);
-    /*
-    @Select("<script>select COUNT(p.ID) from MM_LIST p, USER c
-    where p.USER_ID = #{userId} and p.USER_ID = c.ID <if test=“status != null and status != ‘’”>
-    and p.STATUS = #{status}</if> <if test=“code!= null and code!= ‘’”>and p.CODE = #{code}</if></script>")
-     */
-
+    SysUserModel findByUsername(String username);
 }

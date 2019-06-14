@@ -3,8 +3,9 @@ package demo.service.system.impl;
 import demo.dao.system.SysUserDao;
 import demo.model.system.SysUserModel;
 import demo.service.system.SysUserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 
 /**
  * @ClassName SysUserServiceImpl
@@ -16,11 +17,11 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class SysUserServiceImpl implements SysUserService {
-    @Autowired
+    @Resource
     SysUserDao sysUserDao;
 
     @Override
-    public SysUserModel findByUserName(String userName) {
-        return sysUserDao.findByUserName(userName);
+    public SysUserModel findByUserName(String username) {
+        return sysUserDao.findByUsername(username);
     }
 }

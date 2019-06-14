@@ -43,6 +43,8 @@ spring:
       filter:
         config:
           enabled: true   # 数据库过滤器
+  main:
+    allow-bean-definition-overriding: true
 ---
 spring:
   data:

@@ -50,4 +50,10 @@ public class IndexController extends BaseController {
         return "/login";
 
     }
+
+    @RequestMapping("/403")
+    public String unauthorizedRole() {
+        log.info("------没有权限-------");
+        return "403";
+    }
 }
