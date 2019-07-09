@@ -1,13 +1,17 @@
 package demo.config;
 
+import demo.dao.config.system.RedisSessionDao;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.session.mgt.SessionManager;
+import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.apache.shiro.web.servlet.SimpleCookie;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
@@ -27,6 +31,8 @@ import java.util.Properties;
 @Configuration
 @Slf4j
 public class ShiroConfig {
+    private String jessionId = "sessionId";
+
     @Bean
     public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager) {
         log.info("进入权限拦截");
@@ -48,6 +54,11 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setUnauthorizedUrl("/403");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;
+    }
+
+    @Bean
+    public static LifecycleBeanPostProcessor lifecycleBeanPostProcessor() {
+        return new LifecycleBeanPostProcessor();
     }
 
     /**
@@ -80,15 +91,31 @@ public class ShiroConfig {
      *
      * @return
      */
-    @Bean
+    @Bean(name = "sessionManager")
     public SessionManager sessionManager() {
         DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
         //设置session超时时间单位是毫秒
         sessionManager.setGlobalSessionTimeout(1800000);
+        sessionManager.setDeleteInvalidSessions(true);
+        //接入redis
+        sessionManager.setSessionDAO(getRedisSession());
+        sessionManager.setSessionValidationSchedulerEnabled(true);
+        sessionManager.setSessionIdCookie(getSessionIdCookie());
         return sessionManager;
     }
 
-    @Bean
+    /**
+     * 给shiro的sessionId默认的JSSESSIONID名字改掉
+     *
+     * @return
+     */
+    @Bean(name = "sessionIdCookie")
+    public SimpleCookie getSessionIdCookie() {
+        SimpleCookie simpleCookie = new SimpleCookie(jessionId);
+        return simpleCookie;
+    }
+
+    @Bean(name = "securityManager")
     public SecurityManager securityManager() {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
         securityManager.setRealm(myShiroRealm());
@@ -108,6 +135,11 @@ public class ShiroConfig {
         AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
         authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
         return authorizationAttributeSourceAdvisor;
+    }
+
+    @Bean
+    public RedisSessionDao getRedisSession() {
+        return new RedisSessionDao();
     }
 
     @Bean(name = "simpleMappingExceptionResolver")

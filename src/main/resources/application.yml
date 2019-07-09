@@ -1,5 +1,5 @@
 server:
-  port: 8086
+  port: 8087
   servlet:
     context-path: /maven/
 spring:
@@ -58,6 +58,14 @@ elasticsearch:
   pool: 5
   cluster:
     name: elasticsearch-cluster
+#redis链接配置
+---
 # 日志管理
 logging:
   config: classpath:log4j2_dev.xml
+spring:
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password: supporter
+

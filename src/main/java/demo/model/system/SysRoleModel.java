@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -22,7 +23,8 @@ import java.util.List;
  */
 @Entity
 @Table(name = "sys_role")
-public class SysRoleModel {
+public class SysRoleModel implements Serializable {
+    private static final long serialVersionUID = -173371192476922470L;
     /**
      * 编号
      */

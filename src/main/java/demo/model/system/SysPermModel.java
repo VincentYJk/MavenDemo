@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -23,7 +24,8 @@ import java.util.List;
  */
 @Entity
 @Table(name = "sys_perm")
-public class SysPermModel {
+public class SysPermModel implements Serializable {
+    private static final long serialVersionUID = 1694507849727117391L;
     /**
      * 主键
      */
