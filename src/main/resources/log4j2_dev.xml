@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="WARN">
     <properties>
-        <property name="LOG_HOME">F:/MyDocs/logs/maven-demo</property>
+        <property name="LOG_HOME">E:/MyDocs/logs/maven-demo</property>
         <property name="FILE_NAME">mylog</property>
         <property name="log.sql.level">info</property>
     </properties>
