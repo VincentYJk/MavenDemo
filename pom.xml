@@ -12,6 +12,7 @@
     <groupId>com.self</groupId>
     <artifactId>MavenDemo</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
